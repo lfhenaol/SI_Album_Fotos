@@ -36,10 +36,9 @@ class Usuario
 
     /**
      * @name validar
-     * @return boolean
+     * @return array | bool
      */
     function validar(){
-
     }
 
     /**

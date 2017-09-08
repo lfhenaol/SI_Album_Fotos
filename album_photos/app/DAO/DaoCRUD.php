@@ -6,14 +6,16 @@
  * Time: 12:26 AM
  */
 
-namespace app\DaoCRUD;
+namespace App\DAO;
 
+
+use App\Usuario;
 
 interface DaoCRUD
 {
-    public function insertar();
+    public function insertar($form);
     public function borrar();
     public function actualizar();
-    public function consultar();
+    public function consultar($id);
     public function listar();
 }

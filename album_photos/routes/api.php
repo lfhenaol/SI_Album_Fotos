@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('usuario/login','Usuario\LoginController@validar');
+Route::post('usuario/registro','Usuario\RegistroController@registrar');

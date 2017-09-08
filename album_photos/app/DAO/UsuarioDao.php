@@ -6,16 +6,49 @@
  * Time: 01:42 AM
  */
 
-namespace app\DAO;
+namespace App\DAO;
 
+use App\Persona;
+use App\Usuario;
+use Illuminate\Support\Facades\DB;
 
-use app\DaoCRUD\DaoCRUD;
-
-class UsuarioDao implements DaoCRUD
+class UsuarioDao implements DaoSesion, DaoCRUD
 {
-    public function insertar()
+    public function iniciar(Usuario $usuario)
     {
-        // TODO: Implement insertar() method.
+    }
+
+    public function cerrar()
+    {
+        // TODO: Implement cerrar() method.
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function consultar($id)
+    {
+        return DB::table('usuario')
+            ->join('persona', 'usuario.id_persona','=','persona.id')
+            ->select('persona.nombre', 'persona.avatar')
+            ->where('usuario.nickname','=',$id)
+            ->get();
+    }
+
+    /**
+     * @param Persona $usuario
+     */
+    public function insertar($usuario)
+    {
+        DB::transaction(function () use ($usuario) {
+            $id_persona = DB::table('persona')->insertGetId(
+                ['nombre' => $usuario->getNombre(), 'avatar' => $usuario->getAvatar(), 'tipo' => $usuario->getTipo()]
+            );
+            DB::table('usuario')->insert([
+                ['id_persona' => $id_persona, 'nickname' => $usuario->getUsuario()->getNickname(), 'contrasenia' => bcrypt($usuario->getUsuario()->getContrasenia())]
+            ]);
+        });
     }
 
     public function borrar()
@@ -28,14 +61,8 @@ class UsuarioDao implements DaoCRUD
         // TODO: Implement actualizar() method.
     }
 
-    public function consultar()
-    {
-        // TODO: Implement consultar() method.
-    }
-
     public function listar()
     {
         // TODO: Implement listar() method.
     }
-
 }
