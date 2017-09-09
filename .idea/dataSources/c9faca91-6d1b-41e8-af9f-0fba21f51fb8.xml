@@ -195,20 +195,44 @@ id_album</ColNames>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="48" parent="13" name="nickname">
+    <column id="48" parent="13" name="sesion_usuario">
+      <Position>4</Position>
+      <DataType>varchar(300)|0</DataType>
+    </column>
+    <column id="49" parent="13" name="sesion_navegador">
+      <Position>5</Position>
+      <DataType>varchar(300)|0</DataType>
+    </column>
+    <index id="50" parent="13" name="nickname">
       <ColNames>nickname</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="49" parent="13" name="PRIMARY">
+    <index id="51" parent="13" name="usuario_sesion_navegador_uindex">
+      <ColNames>sesion_navegador</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="52" parent="13" name="usuario_sesion_usuario_uindex">
+      <ColNames>sesion_usuario</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="53" parent="13" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_persona</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="50" parent="13" name="nickname">
+    <key id="54" parent="13" name="nickname">
       <ColNames>nickname</ColNames>
       <UnderlyingIndexName>nickname</UnderlyingIndexName>
     </key>
-    <foreign-key id="51" parent="13" name="usuario_ibfk_1">
+    <key id="55" parent="13" name="usuario_sesion_usuario_uindex">
+      <ColNames>sesion_usuario</ColNames>
+      <UnderlyingIndexName>usuario_sesion_usuario_uindex</UnderlyingIndexName>
+    </key>
+    <key id="56" parent="13" name="usuario_sesion_navegador_uindex">
+      <ColNames>sesion_navegador</ColNames>
+      <UnderlyingIndexName>usuario_sesion_navegador_uindex</UnderlyingIndexName>
+    </key>
+    <foreign-key id="57" parent="13" name="usuario_ibfk_1">
       <ColNames>id_persona</ColNames>
       <RefSchemaName>album_photos</RefSchemaName>
       <RefTableName>persona</RefTableName>

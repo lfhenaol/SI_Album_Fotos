@@ -2,6 +2,9 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Request;
+
 class Usuario
 {
     /**
@@ -39,6 +42,34 @@ class Usuario
      * @return array | bool
      */
     function validar(){
+        $mensajes = array(
+            'nickname.required'     => 'El campo nombre de usuario es requerido',
+            'nickname.max'         => 'El campo nombre de usuario debe contener máximo 50 caracteres',
+            'contrasenia.required'  => 'El campo contrasenia es requerido',
+            'contrasenia.max'      => 'El campo contraseñia debe contener máximo 200 caracteres'
+        );
+
+        $reglas = array(
+            'nickname'      =>  'required|max:50',
+            'contrasenia'   =>  'required|max:200'
+        );
+
+        $campos = array(
+            'nickname'      =>  $this->nickname,
+            'contrasenia'   =>  $this->contrasenia
+        );
+
+        $form_validado = Validator::make($campos, $reglas, $mensajes);
+
+        if($form_validado->fails()){
+            return [
+                'codigo'=>'100',
+                'mensaje' => 'Los campos del formulario contienen errores',
+                'errores' => $form_validado->errors()
+            ];
+        }
+
+        return TRUE;
     }
 
     /**

@@ -5,18 +5,18 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+import angular from 'angular';
+import 'angular-material';
 
-window.Vue = require('vue');
+import AppController from './AppController';
+import Users from './users/Users';
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+export default angular.module('album-photo', ['ngMaterial'])
+    .config(($mdIconProvider, $mdThemingProvider) => {
+        // Register the user `avatar` icons
 
-Vue.component('example', require('./components/Example.vue'));
-
-const app = new Vue({
-    el: '#app'
-});
+        $mdThemingProvider.theme('default')
+            .primaryPalette('brown')
+            .accentPalette('red');
+    })
+    .controller('AppController', AppController);

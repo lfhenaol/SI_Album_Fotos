@@ -11,16 +11,28 @@ namespace App\DAO;
 use App\Persona;
 use App\Usuario;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioDao implements DaoSesion, DaoCRUD
 {
     public function iniciar(Usuario $usuario)
     {
+        $consulta = DB::table('usuario')
+            ->select('usuario.contrasenia')
+            ->where([
+                ['usuario.nickname','=',$usuario->getNickname()]
+            ])
+            ->first();
+
+        if($consulta && Hash::check($usuario->getContrasenia(),$consulta->contrasenia)){
+            return TRUE;
+        }
+
+        return FALSE;
     }
 
     public function cerrar()
     {
-        // TODO: Implement cerrar() method.
     }
 
     /**

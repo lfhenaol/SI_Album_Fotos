@@ -9,12 +9,9 @@
 namespace App\Http\Controllers\Usuario;
 
 use App\DAO\UsuarioDao;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Persona;
-use App\Usuario;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class RegistroController extends Controller
 {

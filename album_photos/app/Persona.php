@@ -60,19 +60,13 @@ class Persona
     function validar(){
         $mensajes = array(
             'nombre.required'       => 'El campo nombre es requerido',
-            'nombre.size'           => 'El campo debe contener máximo 100 caracteres',
+            'nombre.max'           => 'El campo debe contener máximo 100 caracteres',
             'avatar.required'       => 'El campo avatar es requerido',
-            'nickname.required'     => 'El campo nombre de usuario es requerido',
-            'nickname.size'         => 'El campo nombre de usuario debe contener máximo 50 caracteres',
-            'contrasenia.required'  => 'El campo contrasenia es requerido',
-            'contrasenia.size'      => 'El campo contraseñia debe contener máximo 200 caracteres'
-        );
+           );
 
         $reglas = array(
-            'nombre'        =>  'required|size:100',
-            'avatar'        =>  'required',
-            'nickname'      =>  'required|size:50',
-            'contrasenia'   =>  'required|size:200'
+            'nombre'        =>  'required|max:100',
+            'avatar'        =>  'required'
         );
 
         $form_validado = Validator::make(Request::all(), $reglas, $mensajes);
@@ -83,6 +77,10 @@ class Persona
                 'mensaje' => 'Los campos del formulario contienen errores',
                 'errores' => $form_validado->errors()
             ];
+        }
+
+        if(is_array($form_valido = $this->usuario->validar())){
+            return $form_valido;
         }
 
         // Valida que no se ingrese un nombre de usuario ya existente
