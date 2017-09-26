@@ -7,16 +7,45 @@
 
 import angular from 'angular';
 import 'angular-material';
+import 'angular-messages';
+import 'angular-cookies';
+import '@uirouter/angularjs';
 
 import AppController from './AppController';
 import Users from './users/Users';
+import Fotos from './fotos/Fotos';
 
-export default angular.module('album-photo', ['ngMaterial'])
-    .config(($mdIconProvider, $mdThemingProvider) => {
-        // Register the user `avatar` icons
+export default angular.module('album-photo', [
+        'ngMaterial',
+        'ngMessages',
+        'ngCookies',
+        'ui.router',
+        Users.name,
+        Fotos.name
+    ])
+    .config([
+        '$mdIconProvider',
+        '$mdThemingProvider',
+        '$stateProvider',
+        '$urlServiceProvider',
+        ($mdIconProvider,
+         $mdThemingProvider,
+         $stateProvider,
+         $urlServiceProvider) => {
+            // Register the user `avatar` icons
+            $urlServiceProvider.rules.initial({state:"login"});
 
-        $mdThemingProvider.theme('default')
-            .primaryPalette('brown')
-            .accentPalette('red');
-    })
+            // $urlServiceProvider.rules.otherwise({state:"menu.404"});
+            //
+            // $stateProvider
+            //     .state('menu.404',{
+            //         url:        "/404",
+            //         component:  "appPaginaNoEncontrada"
+            //     });
+
+            $mdThemingProvider.theme('default')
+                .primaryPalette('brown')
+                .accentPalette('red');
+        }
+    ])
     .controller('AppController', AppController);

@@ -1,0 +1,69 @@
+<md-progress-circular style="position: absolute; top: 0;left: 0;right: 0;bottom: 0;margin: auto;" ng-disabled="vm.existePerfil" class="md-warn md-hue-3" md-diameter="70"></md-progress-circular>
+<div ng-if="vm.existePerfil" layout="column" style="height:100vh;" ng-cloak>
+
+    <section layout="row" flex>
+
+        <md-sidenav
+                class="md-sidenav-left"
+                md-component-id="left"
+                md-is-locked-open="$mdMedia('gt-md')"
+                md-whiteframe="4">
+
+            <md-toolbar class="md-theme-indigo">
+                <img ng-src="{{vm.perfil.avatar}}" alt="" class="avatar">
+            </md-toolbar>
+            <md-content>
+                <md-list flex>
+                    <md-list-item class="md-2-line" ng-click="null">
+                        <md-icon style="font-size: 37px; color:green;" class="md-avatar" md-font-set="material-icons">add_circle</md-icon>
+                        <div class="md-list-item-text" layout="column">
+                            <h3></h3>
+                            <h4>Agregar albúm</h4>
+                            <p></p>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line" ng-click="null">
+                        <md-icon style="font-size: 37px; color:green;" class="md-avatar" md-font-set="material-icons">photo_album</md-icon>
+                        <div class="md-list-item-text" layout="column">
+                            <h3></h3>
+                            <h4>ver mis albumes</h4>
+                            <p></p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+
+        </md-sidenav>
+
+        <md-content flex layout-padding>
+            <div flex-xs layout="row">
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Vacaciones en las montañas</span>
+                            <span class="md-subhead">Creado por <strong>apofix</strong> el 23 de Febrero de 2015</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content layout="row" layout-align="space-between">
+                        <div class="md-media-xl card-media" style="background-size: cover;">
+
+                        </div>
+
+                        <md-card-actions layout="column">
+                            <md-button class="md-icon-button" aria-label="Favorite">
+                                <md-icon md-font-set="material-icons">favorite</md-icon>
+                            </md-button>
+                            <md-button class="md-icon-button" aria-label="Settings">
+                                <md-icon md-font-set="material-icons">menu</md-icon>
+                            </md-button>
+                            <md-button class="md-icon-button" aria-label="Share">
+                                <md-icon md-font-set="material-icons">share</md-icon>
+                            </md-button>
+                        </md-card-actions>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </md-content>
+    </section>
+
+</div>

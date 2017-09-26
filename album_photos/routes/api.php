@@ -19,3 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('usuario/login','Usuario\LoginController@validar');
 Route::post('usuario/registro','Usuario\RegistroController@registrar');
+Route::post('usuario/validar-sesion','Usuario\SessionController@validar');
+Route::get('test',function(){
+   return response()->json(["session"=>session("sesion_usuario")]);
+});

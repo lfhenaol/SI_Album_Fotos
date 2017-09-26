@@ -16,5 +16,5 @@ angular
             });
 
         let body = document.getElementsByTagName("body")[0];
-        angular.bootstrap( body, [ 'album-photo-app' ]);
+        angular.bootstrap( body, [ 'album-photo-app', 'app-template' ]);
     });

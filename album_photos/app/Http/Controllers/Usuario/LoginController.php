@@ -29,19 +29,16 @@ class LoginController extends Controller
         $this->usuario = new Usuario($req);
         $usuario_valido = $this->usuario->validar();
         if($usuario_valido === TRUE){
-            if($this->usuarioDao->iniciar($this->usuario) === TRUE){
+            if($sess = $this->usuarioDao->iniciar($this->usuario)){
                 return response()
                     ->json(["codigo" => "0", "mensaje"=>"Ha iniciado sesión correctamente"])
-                    ->cookie('laravel_sesso',encrypt(Session::getId()));
+                    ->header('g_s3',$sess);
+
             } else {
                 return response()->json(["codigo"=>"200", "mensaje"=>"El usuario o contraseña son incorrectos"]);
             }
         } else {
             return response()->json($usuario_valido);
         }
-//        $sess =  encrypt(Session::getId());
-//        var_dump($sess);
-//        return response('test')->cookie('laravel_sess',$sess);
-
     }
 }

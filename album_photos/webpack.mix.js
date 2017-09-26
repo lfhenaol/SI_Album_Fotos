@@ -11,5 +11,16 @@ let mix = require('laravel-mix');
  |
  */
 
+mix.config.webpackConfig = {
+    module: {
+        rules: [
+            {
+                test:   /\.html$/,
+                loader: "ng-cache-loader?prefix=resources:**/[dir]&module=app-template"
+            }
+        ]
+    }
+};
+
 mix.js('resources/assets/js/bootstrap.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');

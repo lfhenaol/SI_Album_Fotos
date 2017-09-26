@@ -12,6 +12,7 @@ use App\Persona;
 use App\Usuario;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class UsuarioDao implements DaoSesion, DaoCRUD
 {
@@ -25,7 +26,14 @@ class UsuarioDao implements DaoSesion, DaoCRUD
             ->first();
 
         if($consulta && Hash::check($usuario->getContrasenia(),$consulta->contrasenia)){
-            return TRUE;
+            $session = Session::getId();
+            session(['sesion_usuario' => encrypt($session)]);
+            DB::table('usuario')
+                ->where('nickname',$usuario->getNickname())
+                ->update(
+                    ['sesion_usuario' => $session]
+                );
+            return session("sesion_usuario");
         }
 
         return FALSE;
@@ -45,7 +53,7 @@ class UsuarioDao implements DaoSesion, DaoCRUD
             ->join('persona', 'usuario.id_persona','=','persona.id')
             ->select('persona.nombre', 'persona.avatar')
             ->where('usuario.nickname','=',$id)
-            ->get();
+            ->first();
     }
 
     /**
@@ -76,5 +84,33 @@ class UsuarioDao implements DaoSesion, DaoCRUD
     public function listar()
     {
         // TODO: Implement listar() method.
+    }
+
+    public function obtener_perfil($session_id)
+    {
+
+
+        try {
+            $consulta = DB::table('usuario')
+                ->select('usuario.nickname')
+                ->where([
+                    ['usuario.sesion_usuario','=', decrypt($session_id)]
+                ])
+                ->first();
+
+            settype($consulta, "object");
+
+            $perfil = $this->consultar($consulta->nickname);
+            settype($perfil, "array");
+
+            if($perfil){
+                return $perfil;
+            }
+
+        } catch (\Exception $e) {
+            return FALSE;
+        }
+
+        return FALSE;
     }
 }

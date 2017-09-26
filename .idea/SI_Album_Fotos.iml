@@ -2,6 +2,7 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/album_photos" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/album_photos/resources/assets/js/users/components/details" />
       <excludeFolder url="file://$MODULE_DIR$/album_photos/resources/assets/js/users/components/list" />
     </content>

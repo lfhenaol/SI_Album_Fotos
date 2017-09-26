@@ -13,4 +13,5 @@ use App\Usuario;
 interface DaoSesion {
     public function iniciar(Usuario $usuario);
     public function cerrar();
+    public function obtener_perfil($session_id);
 }
