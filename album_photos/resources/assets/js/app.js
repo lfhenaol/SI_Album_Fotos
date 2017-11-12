@@ -10,18 +10,22 @@ import 'angular-material';
 import 'angular-messages';
 import 'angular-cookies';
 import '@uirouter/angularjs';
+import 'ui-cropper';
+import 'angular-i18n/angular-locale_es-co';
 
 import AppController from './AppController';
 import Users from './users/Users';
-import Fotos from './fotos/Fotos';
+import Dashboard from './dashboard/Dashboard';
 
 export default angular.module('album-photo', [
         'ngMaterial',
         'ngMessages',
         'ngCookies',
         'ui.router',
+        'uiCropper',
+        'ngLocale',
         Users.name,
-        Fotos.name
+        Dashboard.name
     ])
     .config([
         '$mdIconProvider',
@@ -46,6 +50,10 @@ export default angular.module('album-photo', [
             $mdThemingProvider.theme('default')
                 .primaryPalette('brown')
                 .accentPalette('red');
+
+            $mdThemingProvider.theme('dark', 'default')
+                .primaryPalette('yellow')
+                .dark();
         }
     ])
     .controller('AppController', AppController);

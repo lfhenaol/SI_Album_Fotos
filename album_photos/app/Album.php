@@ -1,41 +1,44 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Felipe
+ * Date: 06/11/2017
+ * Time: 08:27 PM
+ */
 
-namespace App;
+namespace app;
 
-use App\DAO\UsuarioDao;
+
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
 
-class Persona
+class Album
 {
     /**
-     * @var
+     * @var null
      */
     private $id;
 
     /**
-     * @var
+     * @var null
      */
     private $nombre;
 
     /**
-     * @var
+     * @var null
      */
-    private $avatar;
+    private $descripcion;
 
     /**
-     * @var
+     * @var null
      */
-    private $tipo;
+    private $privacidad;
 
     /**
-     * @var
+     * @var null
      */
-    private $usuario;
+    private $id_usuario;
 
-    /**
-     * Persona constructor.
-     */
     function __construct($value = null)
     {
         if($value != null){
@@ -46,27 +49,30 @@ class Persona
             if(is_object($value)){
                 $this->id = isset($value->id) ? $value->id: null;
                 $this->nombre = isset($value->nombre) ? $value->nombre: null;
-                $this->avatar = isset($value->avatar) ? $value->avatar: null;
-                $this->tipo = isset($value->tipo) ? $value->tipo: "Usuario";
-                $this->usuario = new Usuario($value);
+                $this->descripcion = isset($value->descripcion) ? $value->descripcion: null;
+                $this->privacidad = isset($value->privacidad) ? $value->privacidad: null;
+                $this->id_usuario = isset($value->id_usuario) ? $value->id_usuario: null;
             }
         }
     }
 
     /**
-     * @name validar
-     * @return mixed
+     * @return array|bool
      */
-    function validar(){
+    public function validar(){
         $mensajes = array(
             'nombre.required'       => 'El campo nombre es requerido',
-            'nombre.max'           => 'El campo debe contener máximo 100 caracteres',
-            'avatar.required'       => 'El campo avatar es requerido',
-           );
+            'nombre.max'            => 'El campo debe contener máximo 100 caracteres',
+            'descripcion.required'  => 'El campo descripción es requerido',
+            'descripcion.max'       => 'El campo debe contener máximo 300 caracteres',
+            'privacidad.required'   => 'El campo privacidad es requerido',
+            'privacidad.digits'     => 'El campo privacidad es numerico y de un solo dígito'
+        );
 
         $reglas = array(
             'nombre'        =>  'required|max:100',
-            'avatar'        =>  'required'
+            'descripcion'   =>  'required|max:300',
+            'privacidad'    =>  'required|digits:1'
         );
 
         $form_validado = Validator::make(Request::all(), $reglas, $mensajes);
@@ -78,20 +84,6 @@ class Persona
                 'errores' => $form_validado->errors()
             ];
         }
-
-        if(is_array($form_valido = $this->usuario->validar())){
-            return $form_valido;
-        }
-
-        // Valida que no se ingrese un nombre de usuario ya existente
-        $usuarioDao = new UsuarioDao();
-        if(!is_null($usuarioDao->consultar($this->getUsuario()->getNickname()))){
-            return [
-                'codigo' => '101',
-                'mensaje' => 'El nombre de usuario ingresado ya existe'
-            ];
-        }
-
 
         return TRUE;
     }
@@ -131,49 +123,49 @@ class Persona
     /**
      * @return mixed
      */
-    public function getAvatar()
+    public function getDescripcion()
     {
-        return $this->avatar;
+        return $this->descripcion;
     }
 
     /**
-     * @param mixed $avatar
+     * @param mixed $descripcion
      */
-    public function setAvatar($avatar)
+    public function setDescripcion($descripcion)
     {
-        $this->avatar = $avatar;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTipo()
-    {
-        return $this->tipo;
-    }
-
-    /**
-     * @param mixed $tipo
-     */
-    public function setTipo($tipo)
-    {
-        $this->tipo = $tipo;
+        $this->descripcion = $descripcion;
     }
 
     /**
      * @return mixed
      */
-    public function getUsuario()
+    public function getPrivacidad()
     {
-        return $this->usuario;
+        return $this->privacidad;
     }
 
     /**
-     * @param mixed $usuario
+     * @param mixed $privacidad
      */
-    public function setUsuario(Usuario $usuario)
+    public function setPrivacidad($privacidad)
     {
-        $this->usuario = $usuario;
+        $this->privacidad = $privacidad;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdUsuario()
+    {
+        return $this->id_usuario;
+    }
+
+    /**
+     * @param mixed $id_usuario
+     */
+    public function setIdUsuario($id_usuario)
+    {
+        $this->id_usuario = $id_usuario;
     }
 
 

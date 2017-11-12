@@ -97,6 +97,10 @@ angular-cookies@^1.6.6:
   version "1.6.6"
   resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.6.6.tgz#311642dafdbc4ff7cd69220b8925b88359fba148"
 
+angular-i18n@^1.6.6:
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/angular-i18n/-/angular-i18n-1.6.6.tgz#f21cbf9161a449be4b7140d8b153f6ca9b087d24"
+
 angular-material@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/angular-material/-/angular-material-1.1.5.tgz#a5450cd8205e15a7691edc389476094cf86d592b"
@@ -105,7 +109,7 @@ angular-messages@^1.6.6:
   version "1.6.6"
   resolved "https://registry.yarnpkg.com/angular-messages/-/angular-messages-1.6.6.tgz#a9bb3fc5f971d745cd3a3bdbaabc6f1f4deb13f3"
 
-angular@^1.6.6:
+angular@>=1.4.0, angular@^1.6.6:
   version "1.6.6"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.6.6.tgz#fd5a3cfb437ce382d854ee01120797978527cb64"
 
@@ -5637,6 +5641,12 @@ uglifyjs-webpack-plugin@^0.4.6:
     source-map "^0.5.6"
     uglify-js "^2.8.29"
     webpack-sources "^1.0.1"
+
+ui-cropper@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/ui-cropper/-/ui-cropper-1.0.6.tgz#edef7c264fb386f192048e0461189f1cba6f98db"
+  dependencies:
+    angular ">=1.4.0"
 
 uid-number@^0.0.6:
   version "0.0.6"

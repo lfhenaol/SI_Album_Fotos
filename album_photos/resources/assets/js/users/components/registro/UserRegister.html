@@ -1,0 +1,79 @@
+<md-progress-circular style="position: absolute; top: 0;left: 0;right: 0;bottom: 0;margin: auto;" 
+ class="md-warn md-hue-3"
+ ng-show="vm.cargando" 
+ md-diameter="70">
+</md-progress-circular>
+
+<div ng-show="!vm.cargando" layout="row" layout-wrap layout-align="center center">
+    <md-content layout-padding>
+        <form name="formRegistro" ng-submit="vm.submit()">
+            <div flex-xs layout="column">
+                <md-card style="width: 660px;">
+                    <md-card-header>
+                        <md-card-avatar>
+                            <md-icon md-font-set="material-icons">account_circle</md-icon>
+                        </md-card-avatar>
+                        <md-card-header-text>
+                            <span class="md-title">Registro</span>
+                            <span class="md-subhead">Álbum de fotos</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <div layout="row">
+                            <md-input-container flex>
+                                    <label>Nombre</label>
+                                    <input required name="nombre" ng-model="vm.form.nombre">
+                                    <div ng-messages="formRegistro.nombre.$error">
+                                        <div ng-message="required">El campo es requerido.</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label>Usuario</label>
+                                    <input required
+                                            name="nickname"
+                                            ng-model="vm.form.nickname">
+                                    <div ng-messages="formRegistro.nickname.$error">
+                                        <div ng-message="required">El campo es requerido.</div>
+                                    </div>
+                                </md-input-container>
+                        </div>
+                        <div layout="row">
+                            <md-input-container flex>
+                                <label>Contraseña</label>
+                                <input required name="contrasenia"
+                                    type="password"
+                                    ng-model="vm.form.contrasenia">
+                                <div ng-messages="formRegistro.contrasenia.$error">
+                                    <div ng-message="required">El campo es requerido.</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Confirmar contraseña</label>
+                                <input required
+                                        name="confirmaContrasenia"
+                                        type="password"
+                                        ng-model="vm.confirmaContrasenia">
+                                <div ng-messages="formRegistro.confirmaContrasenia.$error">
+                                    <div ng-message="required">El campo es requerido.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div layout="row">
+                                <input flex ng-model="vm.myImage" type="file" id="fileInput" />  
+                                <ui-cropper flex image="vm.myImage" 
+                                area-type="circle" 
+                                chargement="'Loading'" 
+                                result-image="vm.form.avatar" 
+                                canvas-scalemode="true">
+                                </ui-cropper>
+                        </div>
+                    </md-card-content>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button type="submit" ui-sref="login">Login</md-button>
+                        <md-button type="submit">Crear cuenta</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+        </form>
+    </md-content>
+</div>

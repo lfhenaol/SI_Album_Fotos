@@ -1,4 +1,10 @@
-<div layout="row" layout-wrap layout-align="center center">
+<md-progress-circular style="position: absolute; top: 0;left: 0;right: 0;bottom: 0;margin: auto;"
+class="md-warn md-hue-3"
+ng-show="vm.cargando" 
+md-diameter="70">
+</md-progress-circular>
+
+<div ng-show="!vm.cargando" layout="row" layout-wrap layout-align="center center">
     <md-content layout-padding>
         <form name="formLogin" ng-submit="vm.submit()">
             <div flex-xs layout="column">
@@ -32,6 +38,7 @@
                         </md-input-container>
                     </md-card-content>
                     <md-card-actions layout="row" layout-align="end center">
+                        <md-button type="submit" ui-sref="registro">Registrarse</md-button>
                         <md-button type="submit">Ingresar</md-button>
                     </md-card-actions>
                 </md-card>

@@ -1,6 +1,7 @@
 function HttpService($http,
                      SessionService,
-                     $q) {
+                     $q,
+                     $state) {
 
     return {
         post:       post,
@@ -48,7 +49,11 @@ function HttpService($http,
                     if (typeof response.data.fault !== 'undefined') {
                         defered.reject(response.data.fault.message.replace(/\\n/g,'<br />')); // Modal: Ocurrio un error
                     } else if (response.data.codigo === "" || response.data.codigo === '0') {
-                        defered.resolve(response.data.response);
+                        defered.resolve(response.data);
+                    } else if (response.data.codigo === '210') {
+                        $state.go("login");
+                        SessionService.borrarSessionID();
+                        defered.reject(response.data.mensaje.replace(/\\n/g,'<br />'));
                     } else {
                         defered.reject(response.data.mensaje.replace(/\\n/g,'<br />'));
                     }
@@ -146,4 +151,4 @@ function HttpService($http,
     }
 }
 
-export default ['$http','SessionService','$q',HttpService];
+export default ['$http','SessionService','$q','$state',HttpService];

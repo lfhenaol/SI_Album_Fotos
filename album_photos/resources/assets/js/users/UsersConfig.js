@@ -4,6 +4,10 @@ function UsersConfig($stateProvider) {
             url:        "/login",
             component:  "usersLogin"
         })
+        .state('registro', {
+            url:        "/registro",
+            component:  "usersRegistro"
+        })
 }
 
 export default ['$stateProvider', UsersConfig];

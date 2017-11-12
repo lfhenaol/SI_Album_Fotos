@@ -13,13 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('usuario/login','Usuario\LoginController@validar');
+
+Route::post('usuario/registro','Usuario\RegistroController@registrar');
+
+Route::post('usuario/validar-sesion','Usuario\SessionController@validar');
+
+Route::group(['middleware' => ['validar_usuario']], function(){
+
+    Route::post('album/crear-album','Album\AlbumController@crear');
+
+    Route::post('album/consultar-albumes','Album\AlbumController@consultar');
+
+    Route::post('album/listar-albumes','Album\AlbumController@listar');
+
 });
 
-Route::post('usuario/login','Usuario\LoginController@validar');
-Route::post('usuario/registro','Usuario\RegistroController@registrar');
-Route::post('usuario/validar-sesion','Usuario\SessionController@validar');
-Route::get('test',function(){
-   return response()->json(["session"=>session("sesion_usuario")]);
-});

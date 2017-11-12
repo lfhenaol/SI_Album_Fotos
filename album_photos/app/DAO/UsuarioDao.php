@@ -51,7 +51,7 @@ class UsuarioDao implements DaoSesion, DaoCRUD
     {
         return DB::table('usuario')
             ->join('persona', 'usuario.id_persona','=','persona.id')
-            ->select('persona.nombre', 'persona.avatar')
+            ->select('persona.nombre', 'persona.avatar', 'persona.id')
             ->where('usuario.nickname','=',$id)
             ->first();
     }
@@ -86,6 +86,10 @@ class UsuarioDao implements DaoSesion, DaoCRUD
         // TODO: Implement listar() method.
     }
 
+    /**
+     * @param $session_id
+     * @return bool|array
+     */
     public function obtener_perfil($session_id)
     {
 

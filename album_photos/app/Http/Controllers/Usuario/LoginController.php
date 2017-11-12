@@ -31,8 +31,7 @@ class LoginController extends Controller
         if($usuario_valido === TRUE){
             if($sess = $this->usuarioDao->iniciar($this->usuario)){
                 return response()
-                    ->json(["codigo" => "0", "mensaje"=>"Ha iniciado sesión correctamente"])
-                    ->header('g_s3',$sess);
+                    ->json(["codigo" => "0", "mensaje"=>"Ha iniciado sesión correctamente", "session"=>$sess]);
 
             } else {
                 return response()->json(["codigo"=>"200", "mensaje"=>"El usuario o contraseña son incorrectos"]);

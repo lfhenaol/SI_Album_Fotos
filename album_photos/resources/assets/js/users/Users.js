@@ -6,6 +6,7 @@
 // import UserDetails from './components/details/UserDetails';
 
 import UsersLogin from './components/login/UsersLogin';
+import UsersRegistro from './components/registro/UserRegister'
 
 import SessionService from './services/SessionService';
 import HttpService from  './services/HttpService';
@@ -25,6 +26,7 @@ export default angular
     .config(UsersConfig)
 
     .component(UsersLogin.name, UsersLogin.config)
+    .component(UsersRegistro.name, UsersRegistro.config)
 
     .service("SessionService", SessionService)
     .service("HttpService", HttpService)
