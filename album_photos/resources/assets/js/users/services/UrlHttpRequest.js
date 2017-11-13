@@ -5,5 +5,7 @@ export default {
     "PERFIL":               host + "usuario/validar-sesion",
     "NUEVO_ALBUM":          host + "album/crear-album",
     "CONSULTAR_ALBUMES":    host + "album/consultar-albumes",
-    "LISTAR_ALBUMES":       host + "album/listar-albumes"
+    "LISTAR_ALBUMES":       host + "album/listar-albumes",
+    "GUARDAR_IMAGEN":       host + "imagen/guardar-imagen",
+    "CONSULTAR_IMAGENES":   host + "imagen/consultar-imagenes-album"
 }

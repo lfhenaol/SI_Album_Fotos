@@ -27,5 +27,9 @@ Route::group(['middleware' => ['validar_usuario']], function(){
 
     Route::post('album/listar-albumes','Album\AlbumController@listar');
 
+    Route::post('imagen/guardar-imagen','Album\Imagen\ImagenController@guardar');
+
+    Route::post('imagen/consultar-imagenes-album','Album\Imagen\ImagenController@consultar');
+
 });
 

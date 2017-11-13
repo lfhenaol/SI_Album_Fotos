@@ -23,7 +23,7 @@ class AlbumDao implements DaoCRUD
                     'descripcion' => $album->getDescripcion(),
                     'privacidad'=> $album->getPrivacidad(),
                     'id_usuario' => $album->getIdUsuario(),
-                    'fecha_creacion'=>date("Y-m-d H:i:s")
+                    'fecha_creacion'=> $album->getFechaCreacion()
                 ]
             ]);
         });
@@ -46,7 +46,7 @@ class AlbumDao implements DaoCRUD
 
     public function listar()
     {
-        return DB::select(DB::raw("SELECT al.nombre, al.descripcion, 
+        return DB::select(DB::raw("SELECT al.id, al.nombre, al.descripcion, 
                                   al.privacidad, al.fecha_creacion, pe.nombre as nombre_usuario 
                                   FROM album as al INNER JOIN 
                                   (usuario as us INNER JOIN persona as pe ON us.id_persona = pe.id)

@@ -6,8 +6,7 @@
  * Time: 08:27 PM
  */
 
-namespace app;
-
+namespace App;
 
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
@@ -17,7 +16,7 @@ class Album
     /**
      * @var null
      */
-    private $id;
+    private $id_album;
 
     /**
      * @var null
@@ -39,6 +38,16 @@ class Album
      */
     private $id_usuario;
 
+    /**
+     * @var
+     */
+    private $fecha_creacion;
+
+    /**
+     * @var
+     */
+    private $imagen;
+
     function __construct($value = null)
     {
         if($value != null){
@@ -47,11 +56,13 @@ class Album
             }
 
             if(is_object($value)){
-                $this->id = isset($value->id) ? $value->id: null;
+                $this->id_album = isset($value->id_album) ? $value->id_album: null;
                 $this->nombre = isset($value->nombre) ? $value->nombre: null;
                 $this->descripcion = isset($value->descripcion) ? $value->descripcion: null;
                 $this->privacidad = isset($value->privacidad) ? $value->privacidad: null;
                 $this->id_usuario = isset($value->id_usuario) ? $value->id_usuario: null;
+                $this->fecha_creacion = date("Y-m-d H:i:s");
+                $this->imagen = new Imagen($value);
             }
         }
     }
@@ -91,17 +102,17 @@ class Album
     /**
      * @return mixed
      */
-    public function getId()
+    public function getIdAlbum()
     {
-        return $this->id;
+        return $this->id_album;
     }
 
     /**
      * @param mixed $id
      */
-    public function setId($id)
+    public function setIdAlbum($id)
     {
-        $this->id = $id;
+        $this->id_album = $id;
     }
 
     /**
@@ -167,6 +178,39 @@ class Album
     {
         $this->id_usuario = $id_usuario;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFechaCreacion()
+    {
+        return $this->fecha_creacion;
+    }
+
+    /**
+     * @param mixed $fecha_creacion
+     */
+    public function setFechaCreacion($fecha_creacion)
+    {
+        $this->fecha_creacion = $fecha_creacion;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+
+    /**
+     * @param mixed $imagen
+     */
+    public function setImagen($imagen)
+    {
+        $this->imagen = $imagen;
+    }
+
 
 
 }

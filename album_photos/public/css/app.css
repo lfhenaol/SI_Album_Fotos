@@ -26762,3 +26762,9 @@ span.name {
   text-transform: capitalize;
 }
 
+.acciones-mis-fotos {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
