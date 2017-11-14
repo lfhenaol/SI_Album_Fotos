@@ -39,9 +39,9 @@ class AlbumDao implements DaoCRUD
         // TODO: Implement actualizar() method.
     }
 
-    public function consultar($id)
+    public function consultar($id_usuario)
     {
-        return DB::table('album')->where('id_usuario',$id)->get();
+        return DB::table('album')->where('id_usuario',$id_usuario)->get();
     }
 
     public function listar()
@@ -52,5 +52,14 @@ class AlbumDao implements DaoCRUD
                                   (usuario as us INNER JOIN persona as pe ON us.id_persona = pe.id)
                                    ON us.id_persona = al.id_usuario WHERE al.privacidad = 1")
         );
+    }
+
+    public function verificarAlbum($albumImagen){
+        return DB::table('album')
+            ->where([
+                ['id_usuario','=',$albumImagen->getImagen()->getIdUsuario()],
+                ['id','=',$albumImagen->getIdAlbum()]
+            ])
+            ->first();
     }
 }

@@ -31,5 +31,7 @@ Route::group(['middleware' => ['validar_usuario']], function(){
 
     Route::post('imagen/consultar-imagenes-album','Album\Imagen\ImagenController@consultar');
 
+    Route::post('comentario/guardar-comentario','Album\Imagen\Comentario\ComentarioController@guardar');
+
 });
 

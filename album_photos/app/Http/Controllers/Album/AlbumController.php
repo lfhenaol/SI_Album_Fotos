@@ -37,7 +37,7 @@ class AlbumController extends Controller
      */
     public function crear(Request $request){
         $this->album = new Album($request);
-        $album_valido = $this->album->validar();
+        $album_valido = $this->album->validar("album");
         if($album_valido === TRUE){
             $this->albumDao->insertar($this->album);
             return response()->json(['codigo' => '0', 'mensaje' => 'Álbum creado exitosamente']);

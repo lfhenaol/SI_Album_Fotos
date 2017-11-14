@@ -8,6 +8,7 @@
 
 namespace App;
 
+use App\DAO\AlbumDao;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -70,30 +71,44 @@ class Album
     /**
      * @return array|bool
      */
-    public function validar(){
-        $mensajes = array(
-            'nombre.required'       => 'El campo nombre es requerido',
-            'nombre.max'            => 'El campo debe contener máximo 100 caracteres',
-            'descripcion.required'  => 'El campo descripción es requerido',
-            'descripcion.max'       => 'El campo debe contener máximo 300 caracteres',
-            'privacidad.required'   => 'El campo privacidad es requerido',
-            'privacidad.digits'     => 'El campo privacidad es numerico y de un solo dígito'
-        );
+    public function validar($modelo){
+        switch ($modelo){
+            case "album":
+                $mensajes = array(
+                    'nombre.required'       => 'El campo nombre es requerido',
+                    'nombre.max'            => 'El campo debe contener máximo 100 caracteres',
+                    'descripcion.required'  => 'El campo descripción es requerido',
+                    'descripcion.max'       => 'El campo debe contener máximo 300 caracteres',
+                    'privacidad.required'   => 'El campo privacidad es requerido',
+                    'privacidad.digits'     => 'El campo privacidad es numerico y de un solo dígito'
+                );
 
-        $reglas = array(
-            'nombre'        =>  'required|max:100',
-            'descripcion'   =>  'required|max:300',
-            'privacidad'    =>  'required|digits:1'
-        );
+                $reglas = array(
+                    'nombre'        =>  'required|max:100',
+                    'descripcion'   =>  'required|max:300',
+                    'privacidad'    =>  'required|digits:1'
+                );
 
-        $form_validado = Validator::make(Request::all(), $reglas, $mensajes);
+                $form_validado = Validator::make(Request::all(), $reglas, $mensajes);
 
-        if($form_validado->fails()){
-            return [
-                'codigo'=>'100',
-                'mensaje' => 'Los campos del formulario contienen errores',
-                'errores' => $form_validado->errors()
-            ];
+                if($form_validado->fails()){
+                    return [
+                        'codigo'=>'100',
+                        'mensaje' => 'Los campos del formulario contienen errores',
+                        'errores' => $form_validado->errors()
+                    ];
+                }
+                break;
+
+            case "imagen":
+                $albumDao = new AlbumDao();
+                if(is_null($albumDao->verificarAlbum($this))){
+                    return [
+                        'codigo'    => '120',
+                        'mensaje'   => 'El álbum al cual se desea agregar la imagen no existe'
+                    ];
+                }
+                break;
         }
 
         return TRUE;

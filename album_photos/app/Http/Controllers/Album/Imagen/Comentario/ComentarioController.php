@@ -9,6 +9,8 @@
 namespace app\Http\Controllers\Album\Imagen;
 
 
+use App\Comentario;
+use App\DAO\ComentarioDao;
 use App\DAO\ImagenDao;
 use App\Http\Controllers\Controller;
 use App\Album;
@@ -20,39 +22,27 @@ class ImagenController extends Controller
     /**
      * @var ImagenDao
      */
-    protected $imagenDao;
-
-    /**
-     * @var Album
-     */
-    protected $albumImagen;
+    protected $comentarioDao;
 
     /**
      * @var
      */
-    protected $imagen;
+    protected $comentario;
 
     function __construct()
     {
-        $this->imagenDao = new ImagenDao();
+        $this->comentarioDao = new ComentarioDao();
     }
 
     public function guardar(Request $request){
-        $this->albumImagen = new Album($request);
-
-        $album_valido = $this->albumImagen->validar("imagen");
-        if($album_valido === TRUE){
-            $imagen_valida = $this->albumImagen->getImagen()->validar();
-            if($imagen_valida === TRUE){
-                $this->imagenDao->insertar($this->albumImagen);
-                return response()->json(['codigo' => '0', 'mensaje' => 'Imagen guardada exitosamente']);
-            } else {
-                return response()->json($imagen_valida);
-            }
+        $this->comentario = new Comentario($request);
+        $imagen_valida = $this->comentario->validar();
+        if($imagen_valida === TRUE){
+            $this->comentarioDao->insertar($this->comentario);
+            return response()->json(['codigo' => '0', 'mensaje' => 'Comentario guardado exitosamente']);
         } else {
-            return response()->json($album_valido);
+            return response()->json($imagen_valida);
         }
-
     }
 
     public function consultar(Request $request){

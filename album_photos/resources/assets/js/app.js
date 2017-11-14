@@ -12,6 +12,7 @@ import 'angular-cookies';
 import '@uirouter/angularjs';
 import 'ui-cropper';
 import 'angular-i18n/angular-locale_es-co';
+import 'angular-image-compress';
 
 import AppController from './AppController';
 import Users from './users/Users';
@@ -24,6 +25,7 @@ export default angular.module('album-photo', [
         'ui.router',
         'uiCropper',
         'ngLocale',
+        'ngImageCompress',
         Users.name,
         Dashboard.name
     ])
