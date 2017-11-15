@@ -32,7 +32,7 @@ class ComentarioDao implements DaoCRUD
         // TODO: Implement borrar() method.
     }
 
-    public function actualizar()
+    public function actualizar($form)
     {
         // TODO: Implement actualizar() method.
     }

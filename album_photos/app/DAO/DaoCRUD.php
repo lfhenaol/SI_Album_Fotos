@@ -15,7 +15,7 @@ interface DaoCRUD
 {
     public function insertar($form);
     public function borrar();
-    public function actualizar();
+    public function actualizar($form);
     public function consultar($id);
     public function listar();
 }

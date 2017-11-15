@@ -41,9 +41,14 @@ class ImagenDao implements DaoCRUD
         // TODO: Implement borrar() method.
     }
 
-    public function actualizar()
+    public function actualizar($imagen)
     {
-        // TODO: Implement actualizar() method.
+        return DB::table('imagen')
+            ->where('id', $imagen->getId())
+            ->update([
+                'titulo' => $imagen->getTitulo(),
+                'descripcion' => $imagen->getDescripcion()
+            ]);
     }
 
     public function consultar($id)

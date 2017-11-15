@@ -61,4 +61,18 @@ class ImagenController extends Controller
         return response()->json(['codigo' => '0',"resultado"=>$albumes]);
     }
 
+    public function modificar(Request $request) {
+        $imagen = new Imagen($request);
+        $valido = $imagen->validar();
+        if ($valido == TRUE) {
+            $modificado = $this->imagenDao->actualizar($imagen);
+            if ($modificado == 1)
+                return response()->json(['codigo' => '0', 'mensaje' => 'Imagen modificada exitosamente']);
+            else
+                return response()->json(['codigo' => '120', 'mensaje' => 'No se encontro la imagen a modificar']);
+        }
+        else
+            return response()->json($valido);
+    }
+
 }
