@@ -1,0 +1,52 @@
+<md-toolbar  style="position:fixed;">
+        <div class="md-toolbar-tools">
+            <h2 flex md-truncate>Álbumes públicos</h2>
+
+            <md-input-container flex md-theme="dark" class="md-icon-float" style="margin-top: 25px">
+                <label></label>
+                <md-icon md-font-set="material-icons">search</md-icon>
+                <input name="busqueda" ng-model="vm.form.album">
+            </md-input-container>
+
+        </div>
+    </md-toolbar>
+    <div flex-xs layout="row" layout-padding style="margin-top:80px;">
+            <md-progress-circular 
+            style="position: absolute; top: 0;left: 0;right: 0;bottom: 0;margin: auto;" 
+            ng-if="vm.cargando && !vm.verImagenes"
+            class="md-warn md-hue-3" 
+            md-diameter="70"></md-progress-circular>
+
+        <md-card
+        style="cursor:pointer;"
+        ng-if="!vm.cargando && !vm.verImagenes"  
+        flex="40" 
+        ng-repeat="album in vm.albumes | filter:vm.form.album"
+        ng-click="vm.verFotos(album)" >
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline capitalize" ng-bind="album.nombre"></span>
+                    <span class="md-subhead">Creado por <strong ng-bind="album.nombre_usuario"></strong> el <span ng-bind="album.fecha_creacion | date:'fullDate'"></span></span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content layout="row" layout-align="space-between">
+                <div class="md-media-xl card-media" style="background-image:url(../../../images/mountain.png);background-size: cover;">
+
+                </div>
+
+                <md-card-actions layout="column">
+                    <md-button class="md-icon-button md-accent" aria-label="Favorite">
+                        <md-icon md-font-set="material-icons">favorite</md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" md-colors="{color:'teal'}" aria-label="Settings">
+                        <md-icon md-font-set="material-icons" md-colors="{color:'teal'}">menu</md-icon>
+                    </md-button>
+                </md-card-actions>
+            </md-card-content>
+        </md-card>
+    </div>
+
+    <dash-imagenes ng-if="vm.verImagenes" 
+    id-album="vm.idAlbum"
+    on-cerrar-fotos="vm.cerrarFotos()" 
+    filtro="vm.form.busqueda"></dash-imagenes>

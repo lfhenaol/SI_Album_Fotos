@@ -36,29 +36,34 @@ class ImagenDao implements DaoCRUD
         });
     }
 
-    public function borrar()
+    public function borrar($imagen)
     {
         // TODO: Implement borrar() method.
     }
 
-    public function actualizar()
+    public function actualizar($imagen)
     {
-        // TODO: Implement actualizar() method.
+        return DB::table('imagen')
+            ->where('id', $imagen->getId())
+            ->update([
+                'titulo'        => $imagen->getTitulo(),
+                'descripcion'   => $imagen->getDescripcion()
+            ]);
     }
 
     public function consultar($id)
     {
-        return DB::table('albumximagen')
-            ->select('imagen.titulo', 'imagen.descripcion', 'imagen.fecha_creacion', 'imagen.foto')
-            ->join('imagen','albumximagen.id_imagen','=','imagen.id')
-            ->where('albumximagen.id_album',$id)
-            ->get();
+        return DB::select(DB::raw("SELECT im.id, im.titulo, im.descripcion, 
+                                  im.fecha_creacion, im.foto, us.nickname as nombre_usuario 
+                                  FROM albumximagen as alxim INNER JOIN 
+                                  (imagen as im INNER JOIN usuario as us ON us.id_persona = im.id_usuario)
+                                   ON alxim.id_imagen = im.id WHERE alxim.id_album = {$id}"));
     }
 
     public function listar()
     {
         return DB::select(DB::raw("SELECT al.nombre, al.descripcion, 
-                                  al.privacidad, al.fecha_creacion, pe.nombre as nombre_usuario 
+                                  al.privacidad, al.fecha_creacion, us.nickname as nombre_usuario 
                                   FROM album as al INNER JOIN 
                                   (usuario as us INNER JOIN persona as pe ON us.id_persona = pe.id)
                                    ON us.id_persona = al.id_usuario WHERE al.privacidad = 1")

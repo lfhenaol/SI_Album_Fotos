@@ -1,0 +1,75 @@
+
+<md-dialog aria-label="Mango (Fruit)" style="width:50%">
+    <form name="formNuevoAlbum" ng-submit="vm.submit()">
+        <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Crear nuevo álbum</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <md-progress-circular 
+            style="position: relative; top: 0;left: 0;right: 0;bottom: 0;margin: auto; margin-bottom:50px; margin-top:50px" 
+            ng-show="vm.cargando" 
+            class="md-warn md-hue-3" 
+            md-diameter="70"></md-progress-circular>
+                
+            <div ng-show="!vm.cargando" class="md-dialog-content" ng-cloak>
+                    
+                    <div layout="row">
+                        <md-input-container flex="50">
+                            <label>Nombre</label>
+                            <input required name="nombre" ng-model="vm.form.nombre">
+                            <div ng-messages="formNuevoAlbum.nombre.$error">
+                                <div ng-message="required">Este campo es requerido</div>
+                            </div>
+                        </md-input-container>
+                
+                        <md-input-container flex="50">
+                            <label>Privacidad</label>
+                            <md-select name="privacidad" ng-model="vm.form.privacidad" required>
+                            <md-option value="1">Público</md-option>
+                            <md-option value="0">Privado</md-option>
+                            </md-select>
+                            <div ng-messages="formNuevoAlbum.privacidad.$error">
+                                <div ng-message="required">El campo es requerido.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <md-input-container class="md-block">
+                        <label>Descripción</label>
+                        <textarea ng-model="vm.form.descripcion" 
+                        md-maxlength="150" 
+                        name="descripcion"
+                        required
+                        rows="5" md-select-on-focus></textarea>
+                        <div ng-messages="formNuevoAlbum.descripcion.$error">
+                            <div ng-message="required">El campo es requerido.</div>
+                        </div>
+                    </md-input-container>
+            
+                    
+            
+                
+                
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row" ng-if="!vm.cargando">
+        <!--<md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
+            More on Wikipedia
+        </md-button>
+        <span flex></span>-->
+        <md-button type="submit">
+            Crear álbum
+        </md-button>
+        <md-button type="button" ng-click="vm.cancelar()">
+            Cancelar
+        </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

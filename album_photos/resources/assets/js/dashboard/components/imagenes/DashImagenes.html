@@ -1,0 +1,72 @@
+<div flex-xs layout="row" layout-align="center center" layout-padding layout-wrap>
+        <md-progress-circular 
+        style="position: absolute; top: 0;left: 0;right: 0;bottom: 0;margin: auto;" 
+        ng-show="vm.cargando" 
+        class="md-warn md-hue-3" 
+        md-diameter="70"></md-progress-circular>
+
+    <md-card ng-show="false"  >
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline capitalize" ng-bind="foto.titulo"></span>
+                <span class="md-subhead">Foto agregada el <span ng-bind="foto.fecha_creacion | date:'fullDate'"></span></span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content layout="row" layout-align="space-between">
+            <div class="md-media-xl card-media" style="background-image:url({{foto.foto}});background-size: cover;">
+
+            </div>
+
+            <md-card-actions layout="column">
+                <md-button class="md-icon-button" md-colors="{color:'teal'}" aria-label="Settings">
+                    <md-icon md-font-set="material-icons" md-colors="{color:'teal'}">menu</md-icon>
+                </md-button>
+            </md-card-actions>
+        </md-card-content>
+    </md-card>
+
+    <md-card flex-xs="100" 
+    flex-sm="40" 
+    flex-md="40" 
+    flex-lg="40" 
+    flex="25" 
+    style="padding:0"
+    ng-show="!vm.cargando" 
+    ng-repeat="foto in vm.fotos | filter:vm.filtro">
+            <img ng-src="{{foto.foto}}" class="md-card-image" alt="Washed Out">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">
+                    <span ng-bind="foto.titulo"></span>
+                        <md-button class="md-icon-button" ng-click="vm.abrirComentarios(foto, ev)">
+                                <md-tooltip
+                                md-direction="right">
+                                    Comentar
+                                </md-tooltip>
+                                <md-icon md-font-set="material-icons">
+                                    comment
+                                </md-icon>
+                            </md-button>
+                </span>
+                <span class="md-subhead">Agregada por <strong ng-bind="foto.nombre_usuario"></strong> el <span ng-bind="foto.fecha_creacion | date:'fullDate'"></span></span>                
+              </md-card-title-text>
+            </md-card-title>
+          </md-card>
+
+    <div flex-xs layout="row" class="acciones-mis-fotos">
+        <md-button class="md-fab" md-colors="{background:'Amber'}" ng-click="vm.onCerrarFotos()">
+            <md-tooltip
+                md-direction="top">
+                Regresar
+            </md-tooltip>
+            <md-icon md-font-set="material-icons">arrow_back</md-icon>
+        </md-button>
+        <md-button ng-if="vm.visibilidad==='privado'" class="md-fab" md-colors="{background:'Green-700'}" ng-click="vm.agregarFoto($event)">
+            <md-tooltip
+                md-direction="top">
+                Agregar foto
+            </md-tooltip>
+            <md-icon md-font-set="material-icons">add</md-icon>
+        </md-button>
+    </div>
+</div>

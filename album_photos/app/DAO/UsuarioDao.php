@@ -71,12 +71,12 @@ class UsuarioDao implements DaoSesion, DaoCRUD
         });
     }
 
-    public function borrar()
+    public function borrar($persona)
     {
         // TODO: Implement borrar() method.
     }
 
-    public function actualizar()
+    public function actualizar($persona)
     {
         // TODO: Implement actualizar() method.
     }

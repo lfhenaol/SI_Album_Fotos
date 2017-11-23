@@ -64,4 +64,29 @@ class AlbumController extends Controller
         $albumes = $this->albumDao->listar();
         return response()->json(['codigo' => '0',"resultado"=>$albumes]);
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function modificar(Request $request) {
+        $this->album = new Album($request);
+        $ok = $this->album->validar("album");
+        if($ok === TRUE) {
+            $this->albumDao->actualizar($this->album);
+            return response()->json(['codigo' => '0', 'mensaje' => 'Álbum actualizado.']);
+        } else {
+            return response()->json($ok);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function eliminar(Request $request) {
+        $this->album = new Album($request);
+        $this->albumDao->borrar($this->album);
+        return response()->json(['codigo' => '0', 'mensaje' => 'Álbum eliminado.']);
+    }
 }

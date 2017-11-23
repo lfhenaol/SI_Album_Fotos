@@ -33,5 +33,11 @@ Route::group(['middleware' => ['validar_usuario']], function(){
 
     Route::post('comentario/guardar-comentario','Album\Imagen\Comentario\ComentarioController@guardar');
 
+    Route::post('imagen/modificar-imagen', 'Album\Imagen\ImagenController@modificar');
+
+    Route::post('album/modificar-album', 'Album\AlbumController@modificar');
+
+    Route::post('album/eliminar-album', 'Album\AlbumController@eliminar');
+
 });
 

@@ -29,14 +29,17 @@ class AlbumDao implements DaoCRUD
         });
     }
 
-    public function borrar()
+    public function borrar($album)
     {
-        // TODO: Implement borrar() method.
+        return DB::table('album')->where('id', '=', $album->getIdAlbum())->delete();
     }
 
-    public function actualizar()
+    public function actualizar($album)
     {
-        // TODO: Implement actualizar() method.
+        return DB::transaction(function () use($album) {
+            DB::update('update album set nombre = ?, descripcion = ?, privacidad = ? where id = ?',
+                [$album->getNombre(),$album->getDescripcion(), $album->getPrivacidad(), $album->getAlbumId()]);
+        });
     }
 
     public function consultar($id_usuario)

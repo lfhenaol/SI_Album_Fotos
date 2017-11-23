@@ -22,17 +22,18 @@ class ComentarioDao implements DaoCRUD
                     'descripcion'   => $comentario->getComentario(),
                     'fecha'         => $comentario->getFechaPublicacion(),
                     'id_imagen'     => $comentario->getIdImagen(),
+                    'id_usuario'    => $comentario->getIdUsuario()
                 ]
             ]);
         });
     }
 
-    public function borrar()
+    public function borrar($comentario)
     {
         // TODO: Implement borrar() method.
     }
 
-    public function actualizar()
+    public function actualizar($comentario)
     {
         // TODO: Implement actualizar() method.
     }

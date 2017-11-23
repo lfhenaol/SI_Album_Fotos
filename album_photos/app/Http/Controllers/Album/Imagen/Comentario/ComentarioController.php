@@ -6,7 +6,7 @@
  * Time: 01:41 PM
  */
 
-namespace app\Http\Controllers\Album\Imagen;
+namespace app\Http\Controllers\Album\Imagen\Comentario;
 
 
 use App\Comentario;
@@ -17,7 +17,7 @@ use App\Album;
 use App\Imagen;
 use Illuminate\Http\Request;
 
-class ImagenController extends Controller
+class ComentarioController extends Controller
 {
     /**
      * @var ImagenDao

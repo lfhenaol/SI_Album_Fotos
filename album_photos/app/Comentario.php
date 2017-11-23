@@ -35,6 +35,11 @@ class Comentario
      */
     private $id_imagen;
 
+    /**
+     * @var
+     */
+    private $id_usuario;
+
     function __construct($value = null)
     {
         if($value != null){
@@ -47,18 +52,19 @@ class Comentario
                 $this->comentario = isset($value->comentario) ? $value->comentario: null;
                 $this->fecha_publicacion = date("Y-m-d H:i:s");
                 $this->id_imagen = isset($value->id_imagen) ? $value->id_imagen: null;
+                $this->id_usuario = isset($value->id_usuario) ? $value->id_usuario: null;
             }
         }
     }
 
     public function validar(){
         $mensajes = array(
-            'descripcion.required'  => 'El campo es requerido',
-            'descripcion.max'       => 'El campo debe contener máximo 300 caracteres'
+            'comentario.required'  => 'El campo es requerido',
+            'comentario.max'       => 'El campo debe contener máximo 300 caracteres'
         );
 
         $reglas = array(
-            'descripcion'   =>  'required|max:300',
+            'comentario'   =>  'required|max:300',
         );
 
         $form_validado = Validator::make(Request::all(), $reglas, $mensajes);
@@ -136,6 +142,22 @@ class Comentario
     public function setIdImagen($id_imagen)
     {
         $this->id_imagen = $id_imagen;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdUsuario()
+    {
+        return $this->id_usuario;
+    }
+
+    /**
+     * @param mixed $id_usuario
+     */
+    public function setIdUsuario($id_usuario)
+    {
+        $this->id_usuario = $id_usuario;
     }
 
 }

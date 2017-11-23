@@ -1,0 +1,68 @@
+
+<md-dialog style="max-width: 93%;max-height: 82.5%;">
+    <md-dialog-content>
+        <div layout="row" flex-xs>
+            <div flex="75">
+                    <img style="position: fixed;max-width: 100%;max-height: 100%;"  
+                    ng-src="{{vm.foto.foto}}" alt="Foto" style="width:100%">
+            </div>
+            <md-list flex="25" style="position: relative; right:0; margin-left: auto; padding: 0">
+                    <md-subheader style="padding:20px" class="md-no-sticky" ng-bind="vm.foto.titulo"></md-subheader>
+                    <md-list-item class="md-3-line md-long-text">
+                      <div class="md-list-item-text">
+                        <h3 ng-bind="vm.foto.descripcion" style="white-space:normal !important;"></h3>
+                        <h3 style="padding-right:99999px; padding-bottom:96px"></h3>
+                      </div>
+                    </md-list-item>
+                    <md-list-item ng-repeat="comentario in vm.comentarios" class="md-3-line md-long-text">
+                            <img ng-src="{{comentario.avatar}}" class="md-avatar" alt="{{todos[0].who}}" />
+                            <div class="md-list-item-text">
+                              <h3 style="text-transform:capitalize;"><strong ng-bind="comentario.nombre"></strong></h3>
+                              <p ng-bind="comentario.descripcion">
+
+                              </p>
+                            </div>
+                          </md-list-item>
+                    <md-list-item class="md-3-line md-long-text" style="margin-bottom:50%">
+                            <img ng-src="{{vm.usuarioActivo.avatar}}" class="md-avatar" alt="{{todos[0].who}}" />
+                            <div class="md-list-item-text">
+                              <h3 style="text-transform:capitalize;"><strong ng-bind="vm.usuarioActivo.nombre"></strong></h3>
+                                <form name="formComentario" ng-submit="formComentario.$valid && vm.agregarComentario()">
+                              <md-input-container class="md-block">
+                                      <label>Comentario</label>
+                                      <input
+                                      md-no-asterisk name="descripcion"
+                                      required 
+                                      ng-model="vm.form.descripcion" md-autofocus>
+                                      <div ng-messages="formComentario.description.$error">
+                                      </div>
+                                    </md-input-container>
+                                    <md-button style="margin-top:-40px; float: right;" type="submit" class="md-icon-button" aria-label="More">
+                                      <md-tooltip
+                                      md-direction="right">
+                                          Enviar
+                                      </md-tooltip>
+                                      <md-icon md-font-set="material-icons">send</md-icon>
+                                    </md-button>
+                                    </form>
+                            </div>
+                          </md-list-item>
+                    <md-divider ></md-divider>
+                </md-list>            
+        </div>
+    </md-dialog-content>
+    <md-dialog-content>
+            <div layout="row">
+  
+            </div>
+        </md-dialog-content>
+    <md-dialog-actions layout="row" ng-if="!vm.cargando">
+    <!--<md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
+        More on Wikipedia
+    </md-button>
+    <span flex></span>-->
+    <md-button type="button" ng-click="vm.cerrar()">
+        Cerrar
+    </md-button>
+    </md-dialog-actions>
+</md-dialog>
